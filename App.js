@@ -9,6 +9,7 @@ import {
 import React, { useState, useRef, useEffect } from "react";
 import FAB from "react-native-fab";
 import { Ionicons } from "@expo/vector-icons";
+import * as ScreenOrientation from "expo-screen-orientation";
 
 const App = () => {
   const webViewRef = useRef();
@@ -21,6 +22,13 @@ const App = () => {
 
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", handleBackButtonPress);
+
+    async function changeScreenOrientation() {
+      await ScreenOrientation.lockAsync(
+        ScreenOrientation.OrientationLock.LANDSCAPE_LEFT
+      );
+    }
+    changeScreenOrientation();
   }, []);
 
   return (
